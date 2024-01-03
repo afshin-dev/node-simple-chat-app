@@ -1,0 +1,4 @@
+1- first run the server 
+2 - then run the client 
+
+** both client and server sent message for forever to each other **
