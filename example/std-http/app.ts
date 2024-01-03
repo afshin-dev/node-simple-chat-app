@@ -15,5 +15,5 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, IP, () => {
-  console.log(`server conected at http:${IP}:${PORT}`);
+  console.log(`server conected at http://${IP}:${PORT}`);
 });
