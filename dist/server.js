@@ -1,8 +1,10 @@
 import net from "node:net";
 import { HOST, PORT } from "./config.js";
 const server = net.createServer();
+const clients = [];
 server.on("connection", (socket) => {
     console.log(`[Server](connect) : `, socket.address());
+    clients.push(socket);
     socket.on("connect", () => {
         console.log(`[Socket](connect) = `, socket?.address());
     });
@@ -16,7 +18,14 @@ server.on("connection", (socket) => {
         console.log(`[Socket](close) = `, socket.address(), `> hadError > ${hadErr}`);
     });
     socket.on("data", (chunck) => {
-        console.log(`[Socket](data)$(${socket.remoteAddress}:${socket.remotePort}) = ${chunck.toString("utf-8")}`);
+        // console.log(clients);
+        for (const c of clients) {
+            // console.log(c.remotePort);
+            if (c) {
+                c.write(`${socket.remotePort}) = ${chunck.toString("utf-8")}`);
+            }
+        }
+        // // socket.write(`${socket.remotePort}) = ${chunck.toString("utf-8")}`);
     });
     socket.on("drain", () => {
         console.log(`[Socket](drain) = if write is puased in this stage you can resume it`);
