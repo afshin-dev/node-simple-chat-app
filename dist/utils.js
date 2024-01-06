@@ -1,3 +1,9 @@
+import { lookup } from "node:dns/promises";
+// dns lookup utility
+async function FindIpByHost(host, options = {}) {
+    return await lookup(host, options);
+}
+console.log(await FindIpByHost("nodejs.org"));
 // promisify version of moveCursor function in stdout stream
 export function moveCursor(dx, dy) {
     return new Promise((resolve, reject) => {

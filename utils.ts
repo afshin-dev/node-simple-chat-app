@@ -1,3 +1,14 @@
+import { lookup } from "node:dns/promises";
+import { LookupAddress, LookupOptions } from "node:dns";
+
+// dns lookup utility
+async function findIpByHost(
+  host: string,
+  options: LookupOptions = {}
+): Promise<LookupAddress | LookupAddress[]> {
+  return await lookup(host, options);
+}
+
 // promisify version of moveCursor function in stdout stream
 export function moveCursor(dx: number, dy: number) {
   return new Promise<void>((resolve, reject) => {
